@@ -4,8 +4,6 @@ const API_URL = 'http://localhost:3000'
 
 export const register = async (userData) => {
   try {
-    console.log(userData)
-
     const response = await axios.post(`${API_URL}/register`, userData)
     return response.data
   } catch (error) {
