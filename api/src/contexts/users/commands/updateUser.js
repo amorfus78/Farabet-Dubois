@@ -9,7 +9,6 @@ const updateUser = async (userId, data) => {
 			.findById(userId)
 		return null
 	} catch (error) {
-		console.error(error)
 		return USER_UPDATE_FAILED
 	}
 }

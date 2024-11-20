@@ -29,7 +29,6 @@ export const authenticate = async (req, res, next) => {
 
 		next()
 	} catch (error) {
-		console.log(error)
 		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json({ error: 'Internal Server Error' })
 	}
 }
