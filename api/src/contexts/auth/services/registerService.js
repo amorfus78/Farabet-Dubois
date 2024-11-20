@@ -4,19 +4,14 @@ import createUser from '../commands/CreateUser.js'
 import hashPassword from '../commands/hashPassword.js'
 
 const registerService = async (data) => {
-
 	const userExists = await doesUserExists(data.email)
 	if (userExists) {
 		return USER_ALREADY_EXISTS
 	}
 
 	const [hashedPassword, salt] = await hashPassword(data.password)
-	
-	const error = await createUser(
-		data.email,
-		hashedPassword,
-		salt
-	)
+
+	const error = await createUser(data.email, hashedPassword, salt)
 	if (error) {
 		return USER_CREATION_FAILED
 	}
