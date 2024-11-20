@@ -2,7 +2,6 @@ import * as yup from 'yup'
 import deepmerge from 'deepmerge'
 import HTTP_CODES from '../httpCodes.js'
 
-
 const validate = (schema) => {
 	const validator = yup.object().shape({
 		...(schema.body ? { body: yup.object().shape(schema.body) } : {}),
@@ -39,7 +38,9 @@ const validate = (schema) => {
 				return
 			}
 
-			res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send(HTTP_CODES.UNEXPECTED_ERROR)
+			res
+				.status(HTTP_CODES.INTERNAL_SERVER_ERROR)
+				.send(HTTP_CODES.UNEXPECTED_ERROR)
 		}
 	}
 }
