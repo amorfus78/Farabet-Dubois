@@ -1,13 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/layouts/Layout'
+import Home from './pages/Home'
+import AuthPage from './pages/AuthPage'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
-      <div className="text-center text-white p-8 bg-opacity-60 rounded-lg shadow-lg max-w-md mx-auto">
-        <h1 className="text-5xl font-bold mb-4">EventHub</h1>
-        <p className="text-lg mb-6">
-          Your go-to platform for unforgettable social events and gatherings.
-        </p>
-      </div>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/auth" element={<AuthPage />} />
+        </Routes>
+      </Layout>
+    </Router>
   )
 }
 
