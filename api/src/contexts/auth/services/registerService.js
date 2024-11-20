@@ -15,12 +15,7 @@ const registerService = async (data) => {
 	const error = await createUser(
 		data.email,
 		hashedPassword,
-		salt,
-		data.first_name,
-		data.last_name,
-		data.age,
-		data.postal_code,
-		data.city,
+		salt
 	)
 	if (error) {
 		return USER_CREATION_FAILED

@@ -9,9 +9,9 @@ const config = {
 	security: {
 		password: {
 			pepper: process.env.PASSWORD_PEPPER,
-			saltlen: 127,
+			saltlen: 128,
 			iterations: 10,
-			keylen: 127,
+			keylen: 128,
 			digest: 'sha512',
 		},
 	},

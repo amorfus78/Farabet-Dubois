@@ -4,26 +4,17 @@ import { USER_CREATION_FAILED } from '../errors.js'
 const createUser = async (
 	email,
 	hashedPassword,
-	salt,
-	first_name,
-	last_name,
-	age,
-	postal_code,
-	city,
+	salt
 ) => {
 	try {
 		await UserModel.query().insert({
 			email,
-			first_name,
-			last_name,
-			age,
-			postal_code,
-			city,
 			password_hash: hashedPassword,
 			password_salt: salt,
 		})
 		return
-	} catch {
+	} catch (error) {
+		console.error(error)
 		return USER_CREATION_FAILED
 	}
 }

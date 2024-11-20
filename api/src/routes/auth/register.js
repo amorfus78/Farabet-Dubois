@@ -9,12 +9,7 @@ const registerRoute = (app) => {
 		validate({
 			body: {
 				email: emailValidator,
-				password: passwordValidator,
-				first_name: nameValidator,
-				last_name: nameValidator,
-				age: ageValidator,
-				postal_code: postalCodeValidator,
-				city: cityValidator,
+				password: passwordValidator
 			},
 		}),
 		registerController
