@@ -1,4 +1,6 @@
 function App() {
+  console.log()
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
       <div className="text-center text-white p-8 bg-opacity-60 rounded-lg shadow-lg max-w-md mx-auto">
@@ -8,7 +10,7 @@ function App() {
         </p>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
