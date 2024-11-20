@@ -6,7 +6,7 @@ const RegisterForm = () => {
           htmlFor="username"
           className="block text-gray-700 font-medium mb-2"
         >
-          Nom d'utilisateur
+          Nom d&apos;utilisateur
         </label>
         <input
           type="text"
@@ -47,7 +47,7 @@ const RegisterForm = () => {
         type="submit"
         className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700"
       >
-        S'inscrire
+        S&apos;inscrire
       </button>
     </form>
   )
