@@ -1,4 +1,4 @@
-import knexfile from '../knexfile'
+import knexfile from '../knexfile.js'
 
 const config = {
 	port: 3000,
