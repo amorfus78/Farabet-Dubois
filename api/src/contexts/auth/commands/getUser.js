@@ -1,9 +1,8 @@
 import UserModel from '../../../../db/models/UserModel.js'
 
-const doesUserExists = async (email) => {
+const getUser = async (email) => {
 	const user = await UserModel.query().findOne({ email })
-	console.log(user)
-	return user ? true : false
+	return user
 }
 
-export default doesUserExists
+export default getUser
