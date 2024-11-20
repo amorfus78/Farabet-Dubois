@@ -14,7 +14,6 @@ const createUser = async (
 		})
 		return
 	} catch (error) {
-		console.error(error)
 		return USER_CREATION_FAILED
 	}
 }
