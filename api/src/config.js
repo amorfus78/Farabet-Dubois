@@ -14,6 +14,10 @@ const config = {
 			keylen: 128,
 			digest: 'sha512',
 		},
+		jwt: {
+			secret: process.env.JWT_SECRET,
+			expiresIn: '2h',
+		},
 	},
 }
 

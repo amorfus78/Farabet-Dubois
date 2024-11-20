@@ -1,4 +1,5 @@
 import registerRoute from './auth/register.js'
+import loginRoute from './auth/login.js'
 
 const init_routes = (app) => {
 	app.get('/', (req, res) => {
@@ -6,6 +7,7 @@ const init_routes = (app) => {
 	})
 
 	registerRoute(app)
+	loginRoute(app)
 }
 
 export default init_routes
