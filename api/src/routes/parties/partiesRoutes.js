@@ -7,6 +7,7 @@ import {
 	consumablesNeededValidator,
 	partyTypeValidator,
 	verifyTokenValidator,
+	idValidator,
 } from '../../validators.js'
 import { authenticate } from '../../middlewares/authenticate.js'
 import validate from '../../middlewares/validate.js'
@@ -32,8 +33,11 @@ const partiesRoutes = (app) => {
 		createPartyController
 	)
 
-	app.get('/parties/user',
+	app.get('/parties/user/:id',
 		validate({
+			params: {
+				id: idValidator,
+			},
 			headers: {
 				authorization: verifyTokenValidator,
 			}

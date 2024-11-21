@@ -2,6 +2,7 @@ import {
 	USER_HAS_NO_ADDRESS,
 	FAILED_TO_CREATE_PARTY,
 	COULD_NOT_GET_PARTIES,
+	USER_DOES_NOT_EXIST,
 } from '../../contexts/parties/errors.js'
 import HTTP_CODES from '../../httpCodes.js'
 import createPartyService from '../../contexts/parties/services/createPartyService.js'
@@ -49,12 +50,15 @@ export const createPartyController = async (req, res) => {
 }
 
 export const getAllPartiesForUserController = async (req, res) => {
-	const userId = req.locals.session.userId
+	const userId = req.params.id
 
 	const [error, parties] = await getAllPartiesForUserService(userId)
 	switch (error) {
 	case COULD_NOT_GET_PARTIES:
 		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_GET_PARTIES })
+		return
+	case USER_DOES_NOT_EXIST:
+		res.status(HTTP_CODES.NOT_FOUND).send({ error: USER_DOES_NOT_EXIST })
 		return
 	}
 
