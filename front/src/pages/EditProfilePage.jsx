@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { updateUser } from '../services/updateUser'
+import AddressForm from '../components/editUser/AddressForm'
 
 const EditProfilePage = () => {
   const [formData, setFormData] = useState({
@@ -85,6 +86,13 @@ const EditProfilePage = () => {
           Enregistrer
         </button>
       </form>
+
+      <div className="mt-8">
+        <AddressForm
+          onSuccess={() => setSuccess('Adresse mise à jour avec succès')}
+          onError={(err) => setError(err.message)}
+        />
+      </div>
     </div>
   )
 }
