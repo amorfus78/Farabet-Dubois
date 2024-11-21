@@ -10,7 +10,7 @@ import {
 } from '../../validators.js'
 import { authenticate } from '../../middlewares/authenticate.js'
 import validate from '../../middlewares/validate.js'
-import createPartyController from '../../controllers/parties/partiesController.js'
+import { createPartyController, getAllPartiesForUserController } from '../../controllers/parties/partiesController.js'
 
 const partiesRoutes = (app) => {
 	app.post('/parties',
@@ -30,6 +30,16 @@ const partiesRoutes = (app) => {
 		}),
 		authenticate,
 		createPartyController
+	)
+
+	app.get('/parties/user',
+		validate({
+			headers: {
+				authorization: verifyTokenValidator,
+			}
+		}),
+		authenticate,
+		getAllPartiesForUserController
 	)
 }
 
