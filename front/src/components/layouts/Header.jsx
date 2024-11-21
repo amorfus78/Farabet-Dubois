@@ -32,11 +32,13 @@ const Header = () => {
                 Accueil
               </Link>
             </li>
-            <li>
-              <Link to="/about" className="hover:text-gray-400">
-                À propos
-              </Link>
-            </li>
+            {authenticated && (
+              <li>
+                <Link to="/profile/edit" className="hover:text-gray-400">
+                  Modifier Profil
+                </Link>
+              </li>
+            )}
             <li>
               <Link to="/contact" className="hover:text-gray-400">
                 Contact
@@ -48,6 +50,7 @@ const Header = () => {
         <div className="space-x-4">
           {authenticated ? (
             <>
+              <span className="text-gray-300">Bienvenue, Utilisateur</span>
               <button
                 onClick={handleLogout}
                 className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded"

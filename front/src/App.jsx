@@ -3,6 +3,7 @@ import Layout from './components/layouts/Layout'
 import Home from './pages/Home'
 import AuthPage from './pages/AuthPage'
 import ProtectedRoute from './utils/ProtectedRoute'
+import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/profile/edit" element={<EditProfilePage />} />
           <Route path="/auth" element={<AuthPage />} />
         </Routes>
       </Layout>

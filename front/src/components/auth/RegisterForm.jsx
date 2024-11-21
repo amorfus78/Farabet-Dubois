@@ -68,7 +68,7 @@ const RegisterForm = ({ setActiveTab }) => {
         disabled={loading}
         className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700"
       >
-        {loading ? 'Chargement...' : 'S&apos;inscrire'}
+        {loading ? 'Chargement...' : "S'inscrire"}
       </button>
     </form>
   )
