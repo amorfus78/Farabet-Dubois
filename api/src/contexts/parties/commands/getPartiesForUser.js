@@ -6,7 +6,6 @@ const getPartiesForUser = async (userId) => {
 	
 		return [null, parties]
 	} catch (error) {
-		console.error(error)
 		return [error, null]
 	}
 }
