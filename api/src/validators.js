@@ -25,3 +25,19 @@ export const stateValidator = yup.string().required()
 export const messageValidator = yup.string().required()
 
 export const idValidator = yup.number().required()
+
+export const partyNameValidator = yup.string().required()
+
+export const priceValidator = yup.number().required()
+
+export const startDateValidator = yup.date().required()
+
+export const numberOfSpotsValidator = yup.number().required()
+
+export const consumablesNeededValidator = yup.boolean().required()
+
+export const partyTypeValidator = yup.string().required()
+
+export const partyDescriptionValidator = yup.string().required()
+
+
