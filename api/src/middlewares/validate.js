@@ -11,6 +11,7 @@ const validate = (schema) => {
 	})
 
 	return async (req, res, next) => {
+		console.log('validate')
 		const customReq = req
 
 		try {

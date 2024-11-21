@@ -3,10 +3,14 @@ import {
 	FAILED_TO_CREATE_PARTY,
 	COULD_NOT_GET_PARTIES,
 	USER_DOES_NOT_EXIST,
+	PARTY_DOES_NOT_EXIST,
+	USER_IS_NOT_HOST,
+	FAILED_TO_UPDATE_PARTY,
 } from '../../contexts/parties/errors.js'
 import HTTP_CODES from '../../httpCodes.js'
 import createPartyService from '../../contexts/parties/services/createPartyService.js'
 import getAllPartiesForUserService from '../../contexts/parties/services/getAllPartiesForUserService.js'
+import updatePartyService from '../../contexts/parties/services/updatePartyService.js'
 
 export const createPartyController = async (req, res) => {
 	const {
@@ -50,7 +54,9 @@ export const createPartyController = async (req, res) => {
 }
 
 export const getAllPartiesForUserController = async (req, res) => {
+	console.log('getAllPartiesForUserController')
 	const userId = req.params.id
+	console.log('userId', userId)
 
 	const [error, parties] = await getAllPartiesForUserService(userId)
 	switch (error) {
@@ -65,4 +71,51 @@ export const getAllPartiesForUserController = async (req, res) => {
 	res.status(HTTP_CODES.OK).send({ parties: parties })
 }
 
+export const updatePartyController = async (req, res) => {
+	const {
+		params: {
+			id,
+		},
+		body: {
+			name,
+			description,
+			price,
+			start_date,
+			number_of_spots,
+			consumables_needed,
+			type,
+		},
+		locals: {
+			session: {
+				userId,
+			},
+		},
+	} = req
+
+	const [error, party] = await updatePartyService(
+		id,
+		name,
+		description,
+		price,
+		start_date,
+		number_of_spots,
+		consumables_needed,
+		type,
+		userId
+	)
+
+	switch (error) {
+	case PARTY_DOES_NOT_EXIST:
+		res.status(HTTP_CODES.NOT_FOUND).send({ error: PARTY_DOES_NOT_EXIST })
+		return
+	case USER_IS_NOT_HOST:
+		res.status(HTTP_CODES.FORBIDDEN).send({ error: USER_IS_NOT_HOST })
+		return
+	case FAILED_TO_UPDATE_PARTY:
+		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: FAILED_TO_UPDATE_PARTY })
+		return
+	}
+
+	res.status(HTTP_CODES.OK).send({ party: party })
+}
 
