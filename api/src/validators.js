@@ -8,8 +8,16 @@ export const nameValidator = yup.string().required()
 
 export const ageValidator = yup.number().required()
 
-export const postalCodeValidator = yup.string().required()
+export const verifyTokenValidator = yup.string().required('Token is required')
+
+export const line1Validator = yup.string().required()
+
+export const line2Validator = yup.string()
 
 export const cityValidator = yup.string().required()
 
-export const verifyTokenValidator = yup.string().required('Token is required')
+export const countryValidator = yup.string().required()
+
+export const postalCodeValidator = yup.string().required()
+
+export const stateValidator = yup.string().required()
