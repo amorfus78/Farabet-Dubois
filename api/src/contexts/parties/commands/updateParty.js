@@ -15,7 +15,6 @@ const updateParty = async (partyId, name, description, price, start_date, number
 
 		return [null, updatedParty]
 	} catch (error) {
-		console.log('error', error)
 		return [error, null]
 	}
 }

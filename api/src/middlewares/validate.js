@@ -11,7 +11,6 @@ const validate = (schema) => {
 	})
 
 	return async (req, res, next) => {
-		console.log('validate')
 		const customReq = req
 
 		try {
@@ -34,10 +33,8 @@ const validate = (schema) => {
 
 			next()
 		} catch (err) {
-			console.log(err)
 			if (err instanceof yup.ValidationError) {
 				res.status(HTTP_CODES.UNPROCESSABLE_ENTITY).send({ error: err.errors })
-				console.log(err.errors)
 				return
 			}
 

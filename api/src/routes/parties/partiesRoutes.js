@@ -8,10 +8,12 @@ import {
 	partyTypeValidator,
 	verifyTokenValidator,
 	idValidator,
+	cityValidator,
 } from '../../validators.js'
 import { authenticate } from '../../middlewares/authenticate.js'
 import validate from '../../middlewares/validate.js'
-import { createPartyController, getAllPartiesForUserController, updatePartyController } from '../../controllers/parties/partiesController.js'
+import { createPartyController, getAllPartiesForUserController, updatePartyController, searchPartiesController } from '../../controllers/parties/partiesController.js'
+
 
 const partiesRoutes = (app) => {
 	app.post('/parties',
@@ -66,6 +68,20 @@ const partiesRoutes = (app) => {
 		}),
 		authenticate,
 		updatePartyController
+	)
+
+	app.get('/parties',
+		validate({
+			query: {
+				city: cityValidator,
+				type: partyTypeValidator,
+			},
+			headers: {
+				authorization: verifyTokenValidator,
+			}
+		}),
+		authenticate,
+		searchPartiesController
 	)
 }
 

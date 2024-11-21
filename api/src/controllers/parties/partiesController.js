@@ -11,6 +11,7 @@ import HTTP_CODES from '../../httpCodes.js'
 import createPartyService from '../../contexts/parties/services/createPartyService.js'
 import getAllPartiesForUserService from '../../contexts/parties/services/getAllPartiesForUserService.js'
 import updatePartyService from '../../contexts/parties/services/updatePartyService.js'
+import searchPartiesService from '../../contexts/parties/services/searchPartiesService.js'
 
 export const createPartyController = async (req, res) => {
 	const {
@@ -54,9 +55,7 @@ export const createPartyController = async (req, res) => {
 }
 
 export const getAllPartiesForUserController = async (req, res) => {
-	console.log('getAllPartiesForUserController')
 	const userId = req.params.id
-	console.log('userId', userId)
 
 	const [error, parties] = await getAllPartiesForUserService(userId)
 	switch (error) {
@@ -119,3 +118,20 @@ export const updatePartyController = async (req, res) => {
 	res.status(HTTP_CODES.OK).send({ party: party })
 }
 
+export const searchPartiesController = async (req, res) => {
+	const {
+		query: {
+			city,
+			type,
+		},
+	} = req
+
+	const [error, parties] = await searchPartiesService(city, type)
+	switch (error) {
+	case COULD_NOT_GET_PARTIES:
+		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_GET_PARTIES })
+		return
+	}
+
+	res.status(HTTP_CODES.OK).send({ parties: parties })
+}
