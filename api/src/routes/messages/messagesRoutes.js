@@ -1,5 +1,5 @@
 import { messageValidator, verifyTokenValidator, idValidator } from '../../validators.js'
-import { createMessageController } from '../../controllers/messages/messageController.js'
+import { createMessageController, getMessagesWithUserController, getConversationsController } from '../../controllers/messages/messageController.js'
 import { authenticate } from '../../middlewares/authenticate.js'
 import validate from '../../middlewares/validate.js'
 
@@ -17,6 +17,26 @@ const messagesRoutes = (app) => {
 		}),
 		authenticate,
 		createMessageController
+	)
+
+	app.get(
+		'/messages',
+		validate({
+			query: {
+				contact_id: idValidator,
+			},
+			headers: {
+				authorization: verifyTokenValidator,
+			},
+		}),
+		authenticate,
+		getMessagesWithUserController
+	)
+
+	app.get(
+		'/conversations',
+		authenticate,
+		getConversationsController
 	)
 }
 
