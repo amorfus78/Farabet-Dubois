@@ -21,3 +21,7 @@ export const countryValidator = yup.string().required()
 export const postalCodeValidator = yup.string().required()
 
 export const stateValidator = yup.string().required()
+
+export const messageValidator = yup.string().required()
+
+export const idValidator = yup.number().required()
