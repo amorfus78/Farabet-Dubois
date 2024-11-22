@@ -40,4 +40,6 @@ export const partyTypeValidator = yup.string().required()
 
 export const partyDescriptionValidator = yup.string().required()
 
+export const hobbyNameValidator = yup.string().required()
+
 

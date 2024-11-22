@@ -1,5 +1,4 @@
 import deepmerge from 'deepmerge'
-import findUserById from '../contexts/users/commands/getUser.js'
 import HTTP_CODES from '../httpCodes.js'
 import jsonwebtoken from 'jsonwebtoken'
 import config from '../config.js'
