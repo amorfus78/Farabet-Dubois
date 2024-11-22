@@ -18,6 +18,7 @@ import {
 	updatePartyController,
 	searchPartiesController,
 	getPartyByIdController,
+	joinPartyController,
 } from '../../controllers/parties/partiesController.js'
 
 
@@ -101,6 +102,19 @@ const partiesRoutes = (app) => {
 		}),
 		authenticate,
 		getPartyByIdController
+	)
+
+	app.post('/parties/:id/join',
+		validate({
+			params: {
+				id: idValidator,
+			},
+			headers: {
+				authorization: verifyTokenValidator,
+			}
+		}),
+		authenticate,
+		joinPartyController
 	)
 }
 

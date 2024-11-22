@@ -7,6 +7,8 @@ import {
 	USER_IS_NOT_HOST,
 	FAILED_TO_UPDATE_PARTY,
 	COULD_NOT_GET_PARTY,
+	COULD_NOT_JOIN_PARTY,
+	USER_ALREADY_PARTICIPANT,
 } from '../../contexts/parties/errors.js'
 import HTTP_CODES from '../../httpCodes.js'
 import createPartyService from '../../contexts/parties/services/createPartyService.js'
@@ -14,6 +16,8 @@ import getAllPartiesForUserService from '../../contexts/parties/services/getAllP
 import updatePartyService from '../../contexts/parties/services/updatePartyService.js'
 import searchPartiesService from '../../contexts/parties/services/searchPartiesService.js'
 import getPartyByIdService from '../../contexts/parties/services/getPartyByIdService.js'
+import joinPartyService from '../../contexts/parties/services/joinPartyService.js'
+
 export const createPartyController = async (req, res) => {
 	const {
 		body: {
@@ -152,4 +156,35 @@ export const getPartyByIdController = async (req, res) => {
 	}
 
 	res.status(HTTP_CODES.OK).send({ party: party })
+}
+
+export const joinPartyController = async (req, res) => {
+	const {
+		params: {
+			id,
+		},
+		locals: {
+			session: {
+				userId,
+			},
+		},
+	} = req
+
+	const [error] = await joinPartyService(id, userId)
+	switch (error) {
+	case PARTY_DOES_NOT_EXIST:
+		res.status(HTTP_CODES.NOT_FOUND).send({ error: PARTY_DOES_NOT_EXIST })
+		return
+	case COULD_NOT_JOIN_PARTY:
+		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_JOIN_PARTY })
+		return
+	case COULD_NOT_GET_PARTY:
+		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_GET_PARTY })
+		return
+	case USER_ALREADY_PARTICIPANT:
+		res.status(HTTP_CODES.BAD_REQUEST).send({ error: USER_ALREADY_PARTICIPANT })
+		return
+	}
+
+	res.status(HTTP_CODES.OK).send({ message: 'Joined party, waiting for host to accept' })
 }
