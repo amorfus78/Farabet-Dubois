@@ -14,6 +14,7 @@ const validate = (schema) => {
 		const customReq = req
 
 		try {
+			console.log('validate')
 			const { body } = await validator.validate(
 				{
 					body: customReq.body,
@@ -33,6 +34,7 @@ const validate = (schema) => {
 
 			next()
 		} catch (err) {
+			console.log(err)
 			if (err instanceof yup.ValidationError) {
 				res.status(HTTP_CODES.UNPROCESSABLE_ENTITY).send({ error: err.errors })
 				return

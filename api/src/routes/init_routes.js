@@ -4,6 +4,8 @@ import userRoutes from './users/userRoutes.js'
 import addressRoutes from './addresses/addressesRoutes.js'
 import messagesRoutes from './messages/messagesRoutes.js'
 import partiesRoutes from './parties/partiesRoutes.js'
+import hobbiesRoutes from './hobbies/hobbiesRoutes.js'
+
 const init_routes = (app) => {
 	app.get('/', (req, res) => {
 		res.send('Hello World')
@@ -15,6 +17,7 @@ const init_routes = (app) => {
 	addressRoutes(app)
 	messagesRoutes(app)
 	partiesRoutes(app)
+	hobbiesRoutes(app)
 }
 
 export default init_routes
