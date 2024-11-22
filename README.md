@@ -36,7 +36,13 @@ Assurez-vous d'avoir installé les éléments suivants :
     npm install
     ```
 
- 4. Lancez le serveur en mode développement :
+ 4. Initialisez la base de données en exécutant les migrations :
+
+    ```
+    knex migrate:up
+    ```
+
+ 5. Lancez le serveur en mode développement :
     
     ```bash
     npm run dev
