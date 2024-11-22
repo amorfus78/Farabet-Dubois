@@ -81,19 +81,21 @@ const partiesRoutes = (app) => {
 		updatePartyController
 	)
 
-	app.get('/parties',
+	app.get('/parties', 
 		validate({
-			query: {
+		  query: {
 				city: cityValidator,
 				type: partyTypeValidator,
-			},
-			headers: {
+				page: numberOfSpotsValidator,
+				limit: numberOfSpotsValidator,
+		  },
+		  headers: {
 				authorization: verifyTokenValidator,
-			}
+		  }
 		}),
 		authenticate,
 		searchPartiesController
-	)
+	  )
 
 	app.get('/parties/:id',
 		validate({
@@ -163,6 +165,7 @@ const partiesRoutes = (app) => {
 		authenticate,
 		updateParticipantStatusController
 	)
+
 }
 
 export default partiesRoutes

@@ -132,21 +132,26 @@ export const updatePartyController = async (req, res) => {
 
 export const searchPartiesController = async (req, res) => {
 	const {
-		query: {
+	  query: {
 			city,
 			type,
-		},
+			page = 1,
+			limit = 5,
+	  },
 	} = req
-
-	const [error, parties] = await searchPartiesService(city, type)
+  
+	const offset = (page - 1) * limit
+	const [error, parties] = await searchPartiesService(city, type, offset, limit)
+	
 	switch (error) {
-	case COULD_NOT_GET_PARTIES:
+	  case COULD_NOT_GET_PARTIES:
 		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_GET_PARTIES })
 		return
 	}
-
-	res.status(HTTP_CODES.OK).send({ parties: parties })
+  
+	res.status(HTTP_CODES.OK).send({ parties })
 }
+  
 
 export const getPartyByIdController = async (req, res) => {
 	const id = req.params.id

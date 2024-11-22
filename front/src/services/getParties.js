@@ -3,7 +3,11 @@ import apiClient from './apiClient'
 export const getParties = async (token, filters = {}) => {
   try {
     const response = await apiClient.get('/parties', {
-      params: filters,
+      params: {
+        page: filters.page || 1,
+        limit: filters.limit || 5,
+        ...filters,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
       },
