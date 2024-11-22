@@ -10,7 +10,7 @@ const addressRoutes = (app) => {
 			body: {
 				line1: line1Validator,
 				line2: line2Validator,
-				city: cityValidator,
+				city: cityValidator.required(),
 				country: countryValidator,
 				state: stateValidator,
 				zip_code: postalCodeValidator,
