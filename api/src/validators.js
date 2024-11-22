@@ -14,7 +14,7 @@ export const line1Validator = yup.string().required()
 
 export const line2Validator = yup.string()
 
-export const cityValidator = yup.string().required()
+export const cityValidator = yup.string()
 
 export const countryValidator = yup.string().required()
 
@@ -36,7 +36,7 @@ export const numberOfSpotsValidator = yup.number().required()
 
 export const consumablesNeededValidator = yup.boolean().required()
 
-export const partyTypeValidator = yup.string().required()
+export const partyTypeValidator = yup.string()
 
 export const partyDescriptionValidator = yup.string().required()
 

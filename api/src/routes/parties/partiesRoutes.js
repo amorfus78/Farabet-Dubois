@@ -36,7 +36,7 @@ const partiesRoutes = (app) => {
 				start_date: startDateValidator,
 				number_of_spots: numberOfSpotsValidator,
 				consumables_needed: consumablesNeededValidator,
-				type: partyTypeValidator,
+				type: partyTypeValidator.required(),
 			},
 			headers: {
 				authorization: verifyTokenValidator,
@@ -71,7 +71,7 @@ const partiesRoutes = (app) => {
 				start_date: startDateValidator,
 				number_of_spots: numberOfSpotsValidator,
 				consumables_needed: consumablesNeededValidator,
-				type: partyTypeValidator,
+				type: partyTypeValidator.required(),
 			},
 			headers: {
 				authorization: verifyTokenValidator,

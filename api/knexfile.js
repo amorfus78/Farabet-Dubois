@@ -13,6 +13,7 @@ const knexfile = {
 		directory: './db/migrations',
 		stub: './db/migration.stub',
 	},
+	debug: true
 }
 
 export default knexfile
