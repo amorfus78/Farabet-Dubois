@@ -11,7 +11,7 @@ const CreatePartyPage = () => {
     start_date: '',
     number_of_spots: 0,
     consumables_needed: false,
-    type: '',
+    type: 'Jeux de société',
   })
   const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
