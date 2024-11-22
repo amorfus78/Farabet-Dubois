@@ -1,8 +1,10 @@
 import createHobbyService from '../../contexts/hobbies/services/createHobbyService.js'
 import attachHobbyToUserService from '../../contexts/hobbies/services/attachHobbyToUser.js'
 import getHobbiesService from '../../contexts/hobbies/services/getHobbiesService.js'
+import getHobbiesByUserIdService from '../../contexts/hobbies/services/getHobbiesByUserIdService.js'
+import getHobbiesByNameService from '../../contexts/hobbies/services/getHobbiesByNameService.js'
 import HTTP_CODES from '../../httpCodes.js'
-import { HOBBY_ALREADY_EXISTS, COULD_NOT_CREATE_HOBBY, HOBBY_NOT_FOUND, COULD_NOT_ATTACH_HOBBY_TO_USER, COULD_NOT_GET_HOBBIES } from '../../contexts/hobbies/errors.js'
+import { HOBBY_ALREADY_EXISTS, COULD_NOT_CREATE_HOBBY, HOBBY_NOT_FOUND, COULD_NOT_ATTACH_HOBBY_TO_USER, COULD_NOT_GET_HOBBIES, USER_NOT_FOUND } from '../../contexts/hobbies/errors.js'
 
 export const createHobbyController = async (req, res) => {
 	console.log('createHobbyController')
@@ -42,6 +44,41 @@ export const attachHobbyToUserController = async (req, res) => {
 export const getHobbiesController = async (req, res) => {
 	const [error, hobbies] = await getHobbiesService()
 
+	switch (error) {
+	case COULD_NOT_GET_HOBBIES:
+		return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json({ error: COULD_NOT_GET_HOBBIES })
+	}
+
+	return res.status(HTTP_CODES.OK).json({ hobbies })
+}
+
+export const getHobbiesByUserIdController = async (req, res) => {
+	console.log('getHobbiesByUserIdController')
+
+	const {
+		params: { user_id },
+	} = req.locals
+
+	const [error, hobbies] = await getHobbiesByUserIdService(user_id)
+
+	switch (error) {
+	case USER_NOT_FOUND:
+		return res.status(HTTP_CODES.NOT_FOUND).json({ error: USER_NOT_FOUND })
+	case COULD_NOT_GET_HOBBIES:
+		return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json({ error: COULD_NOT_GET_HOBBIES })
+	}
+
+	return res.status(HTTP_CODES.OK).json({ hobbies })
+}
+
+export const getHobbiesByNameController = async (req, res) => {
+	console.log('getHobbiesByNameController')
+
+	const {
+		query: { name },
+	} = req.locals
+
+	const [error, hobbies] = await getHobbiesByNameService(name)
 	switch (error) {
 	case COULD_NOT_GET_HOBBIES:
 		return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json({ error: COULD_NOT_GET_HOBBIES })

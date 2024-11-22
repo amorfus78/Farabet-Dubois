@@ -1,7 +1,13 @@
 import validate from '../../middlewares/validate.js'
 import { verifyTokenValidator, hobbyNameValidator, idValidator } from '../../validators.js'
 import { authenticate } from '../../middlewares/authenticate.js'
-import { createHobbyController, attachHobbyToUserController, getHobbiesController } from '../../controllers/hobbies/hobbiesController.js'
+import {
+	createHobbyController,
+	attachHobbyToUserController,
+	getHobbiesController,
+	getHobbiesByUserIdController,
+	getHobbiesByNameController,
+} from '../../controllers/hobbies/hobbiesController.js'
 
 const hobbiesRoutes = (app) => {
 	app.post(
@@ -31,6 +37,26 @@ const hobbiesRoutes = (app) => {
 	app.get('/hobbies',
 		authenticate,
 		getHobbiesController,
+	)
+
+	app.get('/hobbies/search',
+		validate({
+			query: {
+				name: hobbyNameValidator,
+			},
+		}),
+		authenticate,
+		getHobbiesByNameController,
+	)
+
+	app.get('/hobbies/user/:user_id',
+		validate({
+			params: {
+				user_id: idValidator,
+			},
+		}),
+		authenticate,
+		getHobbiesByUserIdController,
 	)
 }
 
