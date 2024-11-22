@@ -18,7 +18,12 @@ const PartyForm = ({ partyData, handleChange, handleSubmit }) => {
             { label: 'Non', value: false },
           ],
         },
-        { label: 'Type de soirée', name: 'type', type: 'text' },
+        {
+          label: 'Type de soirée',
+          name: 'type',
+          type: 'dropdown',
+          options: ['Jeux de société', 'Jeux vidéo', 'Soirée classique'],
+        },
       ].map((field) => (
         <div key={field.name}>
           <label htmlFor={field.name} className="block font-medium mb-2">
@@ -54,6 +59,21 @@ const PartyForm = ({ partyData, handleChange, handleSubmit }) => {
                 </label>
               ))}
             </div>
+          ) : field.type === 'dropdown' ? (
+            <select
+              id={field.name}
+              name={field.name}
+              value={partyData[field.name]}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded"
+            >
+              {field.options.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           ) : (
             <input
               type={field.type}

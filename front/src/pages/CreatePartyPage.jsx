@@ -7,9 +7,9 @@ const CreatePartyPage = () => {
   const [partyData, setPartyData] = useState({
     name: '',
     description: '',
-    price: '',
+    price: 0,
     start_date: '',
-    number_of_spots: '',
+    number_of_spots: 0,
     consumables_needed: false,
     type: '',
   })
