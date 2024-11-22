@@ -33,7 +33,7 @@ const EditProfileForm = ({ onSuccess, onError }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
       {error && <div className="text-red-600">{error}</div>}
       {success && <div className="text-green-600">{success}</div>}
 

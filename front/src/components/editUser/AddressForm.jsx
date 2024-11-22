@@ -53,7 +53,7 @@ const AddressForm = ({ onSuccess, onError }) => {
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Adresse</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
         {error && <div className="text-red-600">{error}</div>}
         {success && <div className="text-green-600">{success}</div>}
 

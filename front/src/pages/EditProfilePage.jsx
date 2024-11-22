@@ -31,7 +31,7 @@ const EditProfilePage = () => {
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-semibold mb-4">Modifier votre profil</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && <div className="text-red-600">{error}</div>}
