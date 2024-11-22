@@ -12,7 +12,13 @@ import {
 } from '../../validators.js'
 import { authenticate } from '../../middlewares/authenticate.js'
 import validate from '../../middlewares/validate.js'
-import { createPartyController, getAllPartiesForUserController, updatePartyController, searchPartiesController } from '../../controllers/parties/partiesController.js'
+import {
+	createPartyController,
+	getAllPartiesForUserController,
+	updatePartyController,
+	searchPartiesController,
+	getPartyByIdController,
+} from '../../controllers/parties/partiesController.js'
 
 
 const partiesRoutes = (app) => {
@@ -82,6 +88,19 @@ const partiesRoutes = (app) => {
 		}),
 		authenticate,
 		searchPartiesController
+	)
+
+	app.get('/parties/:id',
+		validate({
+			params: {
+				id: idValidator,
+			},
+			headers: {
+				authorization: verifyTokenValidator,
+			}
+		}),
+		authenticate,
+		getPartyByIdController
 	)
 }
 

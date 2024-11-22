@@ -6,13 +6,14 @@ import {
 	PARTY_DOES_NOT_EXIST,
 	USER_IS_NOT_HOST,
 	FAILED_TO_UPDATE_PARTY,
+	COULD_NOT_GET_PARTY,
 } from '../../contexts/parties/errors.js'
 import HTTP_CODES from '../../httpCodes.js'
 import createPartyService from '../../contexts/parties/services/createPartyService.js'
 import getAllPartiesForUserService from '../../contexts/parties/services/getAllPartiesForUserService.js'
 import updatePartyService from '../../contexts/parties/services/updatePartyService.js'
 import searchPartiesService from '../../contexts/parties/services/searchPartiesService.js'
-
+import getPartyByIdService from '../../contexts/parties/services/getPartyByIdService.js'
 export const createPartyController = async (req, res) => {
 	const {
 		body: {
@@ -134,4 +135,21 @@ export const searchPartiesController = async (req, res) => {
 	}
 
 	res.status(HTTP_CODES.OK).send({ parties: parties })
+}
+
+export const getPartyByIdController = async (req, res) => {
+	const id = req.params.id
+	const userId = req.locals.session.userId
+
+	const [error, party] = await getPartyByIdService(id, userId)
+	switch (error) {
+	case PARTY_DOES_NOT_EXIST:
+		res.status(HTTP_CODES.NOT_FOUND).send({ error: PARTY_DOES_NOT_EXIST })
+		return
+	case COULD_NOT_GET_PARTY:
+		res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).send({ error: COULD_NOT_GET_PARTY })
+		return
+	}
+
+	res.status(HTTP_CODES.OK).send({ party: party })
 }
