@@ -40,8 +40,8 @@ const Header = () => {
               </li>
             )}
             <li>
-              <Link to="/contact" className="hover:text-gray-400">
-                Contact
+              <Link to="/create-party" className="hover:text-gray-400">
+                Créer une soirée
               </Link>
             </li>
           </ul>

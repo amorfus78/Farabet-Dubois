@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import AuthPage from './pages/AuthPage'
 import ProtectedRoute from './utils/ProtectedRoute'
 import EditProfilePage from './pages/EditProfilePage'
+import CreatePartyPage from './pages/CreatePartyPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/create-party" element={<CreatePartyPage />} />
           <Route path="/profile/edit" element={<EditProfilePage />} />
           <Route path="/auth" element={<AuthPage />} />
         </Routes>
